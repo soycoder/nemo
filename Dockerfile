@@ -57,7 +57,7 @@ RUN source /home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redha
 && mkdir /home/hpc/nemo/tmp/hdf5-1.10.6/build  \
 && cd /home/hpc/nemo/tmp/hdf5-1.10.6/build \
 && cmake3 .. -DCMAKE_INSTALL_PREFIX=/home/hpc/nemo/deps/hdf5/hdf5 -DHDF5_ENABLE_PARALLEL=1 -DHDF5_BUILD_CPP_LIB=0 \ 
-&& make -j $(nproc) install 
+&& make -j $(nproc) install
 
 
 # 5.Build NETCDF Parallel librarywith HDF5 
