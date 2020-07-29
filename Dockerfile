@@ -100,3 +100,10 @@ RUN cd /home/hpc/nemo/apps \
 && ./makenemo -m linux_gfortran -r GYRE_PISCES -n hpcx_linux_gfortran_gyre_pisces -j $(nproc) 
 
 RUN yum install time -y
+
+# 8.1 
+RUN cd /home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 \
+&& cp namelist_cfg orig_namelist_cfg \
+&& chmod 777 namelist_cfg
+
+
