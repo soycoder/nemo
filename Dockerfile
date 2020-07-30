@@ -90,7 +90,7 @@ RUN cd /home/hpc/nemo/apps \
 RUN cd /home/hpc/nemo/apps \ 
 && source /home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hpcx-init.sh \
 && hpcx_load \
-&& ln -s /home/hpc/nemo/apps/xios-2.5 //home \ 
+&& ln -s /home/hpc/nemo/apps/xios-2.5 /$HOME \ 
 && svn co --non-interactive --trust-server-cert https://forge.ipsl.jussieu.fr/nemo/svn/NEMO/releases/release-4.0 nemo-4.0 \ 
 && cd nemo-4.0 \ 
 && export APPROOT=/home/hpc/nemo \
