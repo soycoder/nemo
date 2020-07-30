@@ -80,7 +80,7 @@ RUN cd /home/hpc/nemo/apps \
 && source /home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hpcx-init.sh \
 && hpcx_load \
 && ln -s /home/hpc/nemo/deps/netcdf4/lib64 /home/hpc/nemo/deps/netcdf4/lib \ 
-&& ln -s /home/hpc/nemo/deps/* //home/ \ 
+&& ln -s /home/hpc/nemo/deps/* /$HOME/ \ 
 && svn co http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios-2.5 xios-2.5 \ 
 && cd xios-2.5  \
 && ./make_xios -job $(nproc) --arch GCC_LINUX 
