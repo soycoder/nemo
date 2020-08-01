@@ -101,10 +101,10 @@ RUN cd /home/hpc/nemo/apps \
 
 RUN yum install time -y
 
-# 8.1 set permission
+# 8.1 Configure theGYRE configuration
 RUN cd /home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 \
-&& cp namelist_cfg orig_namelist_cfg \
-&& chmod 777 namelist_cfg
+&& rm namelist_cfg \
+&& wget https://raw.githubusercontent.com/soycoder/nemo/master/namelist_cfg
 
 
 # 9 Install Intel® VTune Amplifier
@@ -120,3 +120,4 @@ RUN cd /home/hpc/nemo/tmp \
 # \
 # && cd vtune_profiler_2020_update2 \
 # && ./install.sh
+
