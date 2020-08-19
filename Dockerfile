@@ -108,14 +108,14 @@ RUN cd /home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 \
 
 
 # 9 Install Intel® VTune Amplifier
-RUN yum install -y gtk3 \
-yum install -y libXScrnSaver \
-yum install -y alsa-lib \
-yum install -y xorg-x11-server-common 
+# RUN yum install -y gtk3 \
+# yum install -y libXScrnSaver \
+# yum install -y alsa-lib \
+# yum install -y xorg-x11-server-common 
 
-RUN cd /home/hpc/nemo/tmp \ 
-&& wget http://registrationcenter-download.intel.com/akdlm/IRC_NAS/tec/16783/vtune_profiler_2020_update2.tar.gz \
-&& tar xf vtune_profiler_2020_update2.tar.gz 
+# RUN cd /home/hpc/nemo/tmp \ 
+# && wget http://registrationcenter-download.intel.com/akdlm/IRC_NAS/tec/16783/vtune_profiler_2020_update2.tar.gz \
+# && tar xf vtune_profiler_2020_update2.tar.gz 
 
 # \
 # && cd vtune_profiler_2020_update2 \
