@@ -121,3 +121,4 @@ RUN cd /home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 \
 # && cd vtune_profiler_2020_update2 \
 # && ./install.sh
 
+RUN yum install libgcc -y
