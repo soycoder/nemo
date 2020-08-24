@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -N nemo_gyre_p
+#PBS -q normal
+#PBS -l select=12:ncpus=24
+#PBS -l walltime=10:00:00
+#PBS -P 50000038
+
+
+
+cd $PBS_O_WORKDIR
+
+module load singularity
+
+echo '======================================================='
+echo Working directory is $PBS_O_WORKDIR
+echo "Starting on `hostname` at `date`"
+
+singularity exec nemo.sif bash run_nemo
+
+echo "Job Ended at `date`"
+echo '======================================================='
