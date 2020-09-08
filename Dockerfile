@@ -124,6 +124,13 @@ RUN cd /home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 \
 RUN yum install libgcc -y
 
 # 10. Install Intel® Parallel Studio
+RUN yum install -y gtk3 \
+yum install -y libXScrnSaver \
+yum install -y alsa-lib \
+yum install -y xorg-x11-server-common \
+yum install -y gtk2 \
+yum install -y pango 
+
 RUN cd home/hpc/nemo/tmp \
 && wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/16526/parallel_studio_xe_2020_update1_cluster_edition.tgz \
 && tar xf parallel_studio_xe_2020_update1_cluster_edition.tgz
