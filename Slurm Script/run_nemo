@@ -1,15 +1,18 @@
 echo "--------------- Access to Work Directory ------------------"
 export APPROOT=/home/hpc/nemo
 cd $APPROOT/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00
-
+echo " : $APPROOT/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00"
 
 echo "--------------------- HPC-X Load  --------------------------"
 source /home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hpcx-init.sh
 hpcx_load
+mpirun --version
 
 export LD_LIBRARY_PATH=/home/hpc/nemo/deps/netcdf4/lib:$LD_LIBRARY_PATH
 
-
+#echo "--------------------- Intel Load  --------------------------"
+#source /tarafs/utils/modules/software/impi/2018.5.288-iccifort-2019.5.281/bin64/mpivars.sh
+#mpirun --version
 
 echo "-------------------- NEMO Running -------------------------"
 MPI=h250
@@ -19,9 +22,9 @@ TAG=${SLURM_JOB_NUM_NODES}n${SLURM_NTASKS}T-${MPI}-oob-bmt25-$SLURM_JOB_ID
 echo "Running on $SLURM_JOB_NODELIST"
 echo "Nnodes = $SLURM_JOB_NUM_NODES"
 echo "Ntasks = $SLURM_NTASKS"
-echo "Launch command: mpirun -np $SLURM_NTASKS --map-by core -reportbindings -mca io ompio -x UCX_NET_DEVICES=mlx5_0:1,mlx5_2:1 ./nemo"
+echo "Launch command: mpirun -np $SLURM_NTASKS --map-by core -reportbindings -mca io ompio -x UCX_TLS=rc UCX_NET_DEVICES=mlx5_0:1 ./nemo"
 
-/usr/bin/time -p mpirun -np $SLURM_NTASKS --map-by core -report-bindings -mca io ompio -x UCX_NET_DEVICES=mlx5_0:1,mlx5_2:1 ./nemo
+/usr/bin/time -p mpirun -np $SLURM_NTASKS --map-by core -report-bindings -mca io ompio -x UCX_TLS=rc -x UCX_NET_DEVICES=mlx5_0:1 ./nemo
 
 cd $SLURM_SUBMIT_DIR
 mkdir $TAG
