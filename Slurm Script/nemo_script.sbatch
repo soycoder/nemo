@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#SBATCH -J l_gyre_p
-#SBATCH -N 24
-#SBATCH --tasks-per-node=40
-#SBATCH -o l_gyre-24n960T-bmt25-%j.out
-#SBATCH -t 12:00:00
+#SBATCH -J gyre_rc
+#SBATCH -N 2
+#SBATCH --tasks-per-node=2
+#SBATCH -o rc-gyre-%j.out
+#SBATCH -t 00:30:00
 #SBATCH -p compute
 #SBATCH -A pre5005
 
@@ -17,4 +17,4 @@ module load Singularity
 singularity --version
 
 # Singularity command line options
-singularity exec centos7_latest.sif bash ./run_nemo
+singularity exec --bind /tarafs/ nemo.sif bash ./run_nemo
