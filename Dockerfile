@@ -134,3 +134,7 @@ yum install -y pango
 RUN cd home/hpc/nemo/tmp \
 && wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/16526/parallel_studio_xe_2020_update1_cluster_edition.tgz \
 && tar xf parallel_studio_xe_2020_update1_cluster_edition.tgz
+
+
+# Compress src code to tar file
+RUN tar -zcvf /home/hpc/nemo/nemo-apps.tar.gz /home/hpc/nemo/apps/
