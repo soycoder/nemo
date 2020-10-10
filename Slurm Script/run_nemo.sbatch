@@ -13,7 +13,7 @@
 #SBATCH --mail-user=apisith.won@dome.tu.ac.th
 
 echo "--------------- Access to Work Directory ------------------"
-export APPROOT=/tarafs/data/home/awongsor
+export APPROOT=/tarafs/data/home/awongsor/nemo
 cd $APPROOT/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00
 echo "Directory : $APPROOT/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00"
 
