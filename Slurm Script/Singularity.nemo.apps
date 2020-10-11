@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: centos:7
+From: wangyoucao577/centos7-gcc7.4:latest
 
 %setup
    echo ${SINGULARITY_ROOTFS}
