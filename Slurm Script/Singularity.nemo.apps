@@ -8,8 +8,6 @@ From: wangyoucao577/centos7-gcc7.4:latest
 
 %post
    yum update -y
-   yum groupinstall -y "Development Tools"
-   yum install -y wget which
 
    yum groupinstall -y "Infiniband Support"
 
