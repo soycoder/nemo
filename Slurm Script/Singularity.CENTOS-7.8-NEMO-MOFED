@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: centos:7.8.2003
+
+%setup
+   echo ${SINGULARITY_ROOTFS}
+   mkdir ${SINGULARITY_ROOTFS}/container
+
+%post
+   yum update -y
+   yum groupinstall -y "Development Tools"
+   yum install -y wget nano
+
+   yum groupinstall -y "Infiniband Support"
+
+# Installing HPCX
+   cd /container
+   mkdir -p /container/apps
+   wget http://content.mellanox.com/hpc/hpc-x/v2.7/hpcx-v2.7.0-gcc-MLNX_OFED_LINUX-5.1-0.6.6.0-redhat7.8-x86_64.tbz
+   tar xf hpcx-v2.7.0-gcc-MLNX_OFED_LINUX-5.1-0.6.6.0-redhat7.8-x86_64.tbz -C /container/apps
+   rm hpcx-v2.7.0-gcc-MLNX_OFED_LINUX-5.1-0.6.6.0-redhat7.8-x86_64.tbz
+
+# Installing MOFED
+   mkdir -p /container/apps/MOFED
+   cd /container/apps/MOFED
+   wget http://content.mellanox.com/ofed/MLNX_OFED-5.1-0.6.6.0/MLNX_OFED_LINUX-5.1-0.6.6.0-rhel7.8-x86_64.tgz
+   tar xf MLNX_OFED_LINUX-5.1-0.6.6.0-rhel7.8-x86_64.tgz
+   
+   # # *Require* - ROOT with Device mlx
+   # cd /container/apps/MOFED/MLNX_OFED_LINUX-5.1-0.6.6.0-rhel7.8-x86_64
+   # ./mlnxofedinstall
