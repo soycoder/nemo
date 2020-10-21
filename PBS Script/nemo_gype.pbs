@@ -1,21 +1,19 @@
 #!/bin/bash
-#PBS -N nemo_gyre_p
+#PBS -N gyre_p
 #PBS -q normal
-#PBS -l select=12:ncpus=24
-#PBS -l walltime=10:00:00
+#PBS -l select=24:ncpus=20:mpiprocs=40
+#PBS -l walltime=06:00:00
 #PBS -P 50000038
-
-
 
 cd $PBS_O_WORKDIR
 
+echo "===================== Load ENV ==========================="
 module load singularity
+source ~/nemo/apps/hpcx-v2.7/hpcx-v2.7.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat6.10-x86_64/hpcx-init.sh
 
-echo '======================================================='
-echo Working directory is $PBS_O_WORKDIR
-echo "Starting on `hostname` at `date`"
+hpcx_load
 
-singularity exec nemo.sif bash run_nemo
+echo "==================== Running NEMO =========================="
+cd EXP00 
+time -p mpirun -np 960 --map-by core -report-bindings -mca io ompio -x UCX_NET_DEVICES=mlx5_0:1  singularity exec ../centos7_nemo-ocean.sif ./nemo
 
-echo "Job Ended at `date`"
-echo '======================================================='

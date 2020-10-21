@@ -1,19 +1,45 @@
-#
-export APPROOT=/home/hpc/nemo
-cd $APPROOT/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00
+
+cd /home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00
 
 # Set hpc-x lib
 source /home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hpcx-init.sh
 hpcx_load
 export LD_LIBRARY_PATH=/home/hpc/nemo/deps/netcdf4/lib:$LD_LIBRARY_PATH
 
-# running NEMO
+
+source ~/nemo/apps/hpcx-v2.7/hpcx-v2.7.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat6.10-x86_64/hpcx-init.sh 
+ -> source /home/users/industry/ai-hpc/apacsc24/nemo/apps/hpcx-v2.7/hpcx-v2.7.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat6.10-x86_64/hpcx-init.sh
+hpcx_load
+
 /usr/bin/time -p mpirun -np 288 --map-by core -report-bindings -mca io ompio -x UCX_NET_DEVICES=mlx5_0:1,mlx5_2:1 ./nemo
 
+#####
+|
+|   module load singularity 
+
+##### Binding
+|
+|   --bind  /home/project/50000038/nemo/EXP01:/nemo/home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00
+|
+
+##### Singularity ENV
+|   
+|   ! - PATH
+|   SINGULARITYENV_APPEND_PATH=/home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00
+|
+|   ! - LD_LIBRARY_PATH
+|   SINGULARITYENV_LD_LIBRARY_PATH=/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/nccl_rdma_sharp_plugin/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/ucx/lib/ucx:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/ucx/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/sharp/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hcoll/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/ompi/lib:/home/hpc/nemo/deps/netcdf4/lib:/usr/local/gcc-7_4_0/lib64/:/usr/local/gcc-7_4_0/lib/:/usr/local/gcc-7_4_0/lib/gcc/x86_64-pc-linux-gnu/7.4.0/::/.singularity.d/libs 
+|
+
+##### Running NEMO
+|
+|     
+time -p mpirun -np 24 --map-by core -report-bindings -mca io ompio -x UCX_NET_DEVICES=mlx5_0:1 SINGULARITYENV_APPEND_PATH=/home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 SINGULARITYENV_LD_LIBRARY_PATH=/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/nccl_rdma_sharp_plugin/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/ucx/lib/ucx:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/ucx/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/sharp/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hcoll/lib:/home/hpc/nemo/apps/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/ompi/lib:/home/hpc/nemo/deps/netcdf4/lib:/usr/local/gcc-7_4_0/lib64/:/usr/local/gcc-7_4_0/lib/:/usr/local/gcc-7_4_0/lib/gcc/x86_64-pc-linux-gnu/7.4.0/::/.singularity.d/libs singularity exec -B /home/project/50000038/nemo/EXP00/:/nemo/home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 centos7_nemo-ocean.sif nemo
 
 
-TAG=/home/project/50000038/nemo/results/${PBS_JOBID}
 
+time -p mpirun -np 24 --map-by core -report-bindings -mca io ompio -x UCX_NET_DEVICES=mlx5_0:1  singularity exec -B /home/project/50000038/nemo/EXP00/:/nemo/home/hpc/nemo/apps/nemo-4.0/cfgs/hpcx_linux_gfortran_gyre_pisces/EXP00 centos7_nemo-ocean.sif nemo
+|
 
 
 mkdir $TAG
