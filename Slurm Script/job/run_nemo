@@ -1,0 +1,9 @@
+cd /tarafs/data/project/pre5005-HPCAI/nemo/EXP01
+
+# echo "--------------------- HPC-X Load  --------------------------"
+source /tarafs/data/project/pre5005-HPCAI/nemo/SRC/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-redhat7.7-x86_64/hpcx-init.sh
+hpcx_load
+
+export LD_LIBRARY_PATH=/home/hpc/nemo/deps/netcdf4/lib:$LD_LIBRARY_PATH
+
+./nemo
